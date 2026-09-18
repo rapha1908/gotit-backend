@@ -4,15 +4,23 @@
   "description": "Got It Backend, Application for managing building and tenants tasks as cleaning, maintenance, and other tasks. It is a web application that allows tenants to submit requests for cleaning and maintenance tasks, and allows building managers to manage these requests.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint:check": "prettier --check .",
+    "lint:fix": "prettier --write ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^26.6.1",
+    "prettier": "3.9.8",
     "tsup": "^8.5.1",
     "tsx": "^4.23.13",
     "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "dotenv": "18.0.0",
+    "fastify": "5.12.5",
+    "zod": "4.6.5"
   }
 }
