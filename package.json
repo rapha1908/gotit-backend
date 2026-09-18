@@ -1,0 +1,18 @@
+{
+  "name": "GOT IT Backend",
+  "version": "1.0.0",
+  "description": "Got It Backend, Application for managing building and tenants tasks as cleaning, maintenance, and other tasks. It is a web application that allows tenants to submit requests for cleaning and maintenance tasks, and allows building managers to manage these requests.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^26.6.1",
+    "tsup": "^8.5.1",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2"
+  }
+}
