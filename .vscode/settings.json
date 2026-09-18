@@ -1,0 +1,8 @@
+{
+  // Desativa as sugestoes do Copilot apenas neste projeto.
+  // O IntelliSense normal do TypeScript continua funcionando.
+  "github.copilot.enable": {
+    "*": false
+  },
+  "editor.inlineSuggest.enabled": false
+}
