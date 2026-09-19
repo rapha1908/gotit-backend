@@ -1,7 +1,7 @@
 import { Iuser } from "./model/user.interface";
 
 export class User implements Iuser {
-  id: string;
+  id?: string;
   email: string;
   password: string;
   role: "ADMIN" | "PRESTADOR";

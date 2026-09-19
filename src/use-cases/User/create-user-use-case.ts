@@ -1,4 +1,3 @@
-import { randomUUID } from "node:crypto";
 import { User } from "../../entities/user.entity";
 import { UserRepository } from "../../repository/user.repository";
 
@@ -13,7 +12,6 @@ export class CreateUserUseCase {
 
   handle({ email, password, role }: CreateUserUseCaseRequest): Promise<User> {
     const user = new User({
-      id: randomUUID(),
       email,
       password,
       role,

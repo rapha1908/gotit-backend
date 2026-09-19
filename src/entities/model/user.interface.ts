@@ -1,5 +1,5 @@
 export interface Iuser {
-  id: string;
+  id?: string;
   email: string;
   password: string;
   role: "ADMIN" | "PRESTADOR";
