@@ -6,18 +6,19 @@ import { UserRepository } from "../../../repository/user.repository";
 export async function createUser(req: FastifyRequest, res: FastifyReply) {
   //indetify the user request body
   const userSchema = z.object({
+    name: z.string().min(1),
     email: z.string().email(),
     password: z.string().min(6),
     role: z.enum(["ADMIN", "PRESTADOR"]),
   });
 
   try {
-    const { email, password, role } = userSchema.parse(req.body);
+    const { name, email, password, role } = userSchema.parse(req.body);
 
     const userRepository = new UserRepository();
     const createUserUseCase = new CreateUserUseCase(userRepository);
 
-    await createUserUseCase.handle({ email, password, role });
+    await createUserUseCase.handle({ name, email, password, role });
 
     return res.status(201).send({ message: "User created successfully" });
   } catch (error) {

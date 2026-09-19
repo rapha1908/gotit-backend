@@ -3,7 +3,7 @@ import { error } from "node:console";
 import { z } from "zod";
 
 const envSchema = z.object({
-  ENV: z.enum(["developement", "production"]).default("developement"),
+  ENV: z.enum(["development", "production"]).default("development"),
   PORT: z.coerce.number().default(3000),
   PG_HOST: z.string().default("localhost"),
   PG_PORT: z.coerce.number().default(5432),
