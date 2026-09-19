@@ -1,11 +1,14 @@
 import { randomUUID } from "node:crypto";
 import { Iuser } from "../entities/model/user.interface";
 import { User } from "../entities/user.entity";
+import { Database } from "../lib/pg/db";
 
 export class UserRepository {
   async create(user: User): Promise<User> {
-    // simula o "DEFAULT gen_random_uuid()" do banco (script.sql) até o Postgres ser conectado de fato
-    user.id = randomUUID();
+    const result = await Database.clientInstance?.query(
+      "INSERT INTO app_user (email, password, role) VALUES ($1, $2, $3, $4) RETURNING *",
+      [user.email, user.password, user.role],
+    );
 
     return user;
   }

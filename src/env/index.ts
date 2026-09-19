@@ -5,6 +5,11 @@ import { z } from "zod";
 const envSchema = z.object({
   ENV: z.enum(["developement", "production"]).default("developement"),
   PORT: z.coerce.number().default(3000),
+  PG_HOST: z.string().default("localhost"),
+  PG_PORT: z.coerce.number().default(5432),
+  PG_DATABASE: z.string(),
+  PG_USER: z.string(),
+  PG_PASSWORD: z.string(),
 });
 
 const _env = envSchema.safeParse(process.env);
