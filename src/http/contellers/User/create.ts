@@ -6,22 +6,25 @@ import { UserRepository } from "../../../repository/user.repository";
 export async function createUser(req: FastifyRequest, res: FastifyReply) {
   //indetify the user request body
   const userSchema = z.object({
-    id: z.string().uuid(),
     email: z.string().email(),
     password: z.string().min(6),
     role: z.enum(["ADMIN", "PRESTADOR"]),
   });
 
-  const { id, email, password, role } = userSchema.parse(req.body);
-
   try {
+    const { email, password, role } = userSchema.parse(req.body);
+
     const userRepository = new UserRepository();
     const createUserUseCase = new CreateUserUseCase(userRepository);
 
-    await createUserUseCase.handle({ id, email, password, role });
+    await createUserUseCase.handle({ email, password, role });
 
     return res.status(201).send({ message: "User created successfully" });
   } catch (error) {
+    if (error instanceof z.ZodError) {
+      return res.status(400).send({ error: error.issues });
+    }
+
     return res.status(500).send({ error: "Internal Server Error" });
   }
 }
