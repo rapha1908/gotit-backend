@@ -1,5 +1,8 @@
+import { hash } from "bcrypt";
 import { User } from "../../entities/user.entity";
 import { UserRepository } from "../../repository/user.repository";
+
+const SALT_ROUNDS = 10;
 
 interface CreateUserUseCaseRequest {
   name: string;
@@ -11,16 +14,18 @@ interface CreateUserUseCaseRequest {
 export class CreateUserUseCase {
   constructor(private userRepository: UserRepository) {}
 
-  handle({
+  async handle({
     name,
     email,
     password,
     role,
   }: CreateUserUseCaseRequest): Promise<User> {
+    const passwordHash = await hash(password, SALT_ROUNDS);
+
     const user = new User({
       name,
       email,
-      password,
+      password: passwordHash,
       role,
     });
 

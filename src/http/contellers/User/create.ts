@@ -18,9 +18,16 @@ export async function createUser(req: FastifyRequest, res: FastifyReply) {
     const userRepository = new UserRepository();
     const createUserUseCase = new CreateUserUseCase(userRepository);
 
-    await createUserUseCase.handle({ name, email, password, role });
+    const user = await createUserUseCase.handle({
+      name,
+      email,
+      password,
+      role,
+    });
 
-    return res.status(201).send({ message: "User created successfully" });
+    const token = await res.jwtSign({ sub: user.id, role: user.role });
+
+    return res.status(201).send({ token });
   } catch (error) {
     if (error instanceof z.ZodError) {
       return res.status(400).send({ error: error.issues });

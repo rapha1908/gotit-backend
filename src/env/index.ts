@@ -10,6 +10,7 @@ const envSchema = z.object({
   PG_DATABASE: z.string(),
   PG_USER: z.string(),
   PG_PASSWORD: z.string(),
+  JWT_SECRET: z.string().min(32),
 });
 
 const _env = envSchema.safeParse(process.env);
